@@ -53,7 +53,7 @@ install-re2c() {
   make
 }
 
-re2c() { _deps/re2c-1.0.3/re2c "$@"; }
+#re2c() { _deps/re2c-1.0.3/re2c "$@"; }
 
 download-clang() {
   wget --directory _deps \
