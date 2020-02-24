@@ -229,20 +229,21 @@ yajl-release() {
 }
 
 yajl() {
+  :
   ### Build and test yajl binding (depends on submodule)
 
-  pushd py-yajl
-  python2 setup.py build_ext --inplace
+  # pushd py-yajl
+  # python2 setup.py build_ext --inplace
 
-  # Adapted from py-yajl/runtests.sh
-  python2 tests/unit.py
+  # # Adapted from py-yajl/runtests.sh
+  # python2 tests/unit.py
 
-  # Hm this test doesn't make any assertions.
-  zcat test_data/issue_11.gz | python2 tests/issue_11.py | wc -l
-  popd
+  # # Hm this test doesn't make any assertions.
+  # zcat test_data/issue_11.gz | python2 tests/issue_11.py | wc -l
+  # popd
 
-  # Link it in the repo root
-  ln -s -f py-yajl/yajl.so .
+  # # Link it in the repo root
+  # ln -s -f py-yajl/yajl.so .
 }
 
 clean() {
