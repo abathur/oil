@@ -179,7 +179,7 @@ py-ext() {
 
 pylibc() {
   py-ext libc build/setup.py
-  native/libc_test.py "$@" > /dev/null
+  # native/libc_test.py "$@" > /dev/null
 }
 
 fastlex() {
