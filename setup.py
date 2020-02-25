@@ -20,5 +20,5 @@ setup(
     # For posix_methods.def
     include_dirs=["build/oil-defs", "_devbuild/gen"],  # posix_ & fastlex
     ext_modules=[posix_, line_input, fastlex, libc],
-    scripts=["bin/oil.py", "bin/opy_.py", "bin/osh_eval.py", "bin/osh_parse.py"],
+    scripts=["bin/oil.py", "bin/osh_eval.py", "bin/osh_parse.py"],
 )
