@@ -100,7 +100,7 @@
 # test/spec.sh dbracket --format=diffable
 # test/spec.sh dparen --format=diffable
 # test/spec.sh empty-bodies --format=diffable
-test/spec.sh errexit-oil --format=ansi -r 12
+test/spec.sh errexit-oil -v --format=ansi -r 12
 # test/spec.sh errexit --format=diffable
 # test/spec.sh exit-status --format=diffable
 # test/spec.sh explore-parsing --format=diffable
