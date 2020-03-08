@@ -24,6 +24,8 @@ source build/common.sh
 
 export PYTHONPATH='.:vendor/'
 
+export PATH="$PATH:$PWD/_deps/re2c-1.0.3"
+
 # Files
 #
 # native/lex.c -- calls generated function?
@@ -56,8 +58,6 @@ install-re2c() {
   ./configure
   make
 }
-
-re2c() { _deps/re2c-1.0.3/re2c "$@"; }
 
 download-clang() {
   wget --directory _deps \
