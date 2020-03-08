@@ -58,6 +58,7 @@
 # test/spec.sh oil-interactive --format=diffable
 # test/spec.sh oil-json --format=diffable
 # test/spec.sh oil-keywords --format=diffable
+test/spec.sh oil-keywords --format=diffable
 # test/spec.sh oil-regex --format=diffable
 # test/spec.sh oil-slice-range --format=diffable
 # test/spec.sh oil-tuple --format=diffable
