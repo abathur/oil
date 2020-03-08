@@ -473,7 +473,7 @@ glob() {
 }
 
 arith() {
-  sh-spec spec/arith.test.sh \
+  sh-spec spec/arith.test.sh --osh-failures-allowed 4 \
     ${REF_SHELLS[@]} $ZSH $OSH_LIST "$@"
 }
 
