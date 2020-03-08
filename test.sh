@@ -76,12 +76,12 @@
 # test/spec.sh background --format=diffable
 # test/spec.sh blog1 --format=diffable
 # test/spec.sh blog2 --format=diffable
-test/spec.sh brace-expansion -v --format=ansi -r 29
+# test/spec.sh brace-expansion -v --format=ansi -r 29
 # test/spec.sh bugs --format=diffable
 # test/spec.sh builtin-bash --format=diffable
 # test/spec.sh builtin-bracket --format=diffable
 test/spec.sh builtin-completion -v --format=ansi -r 11
-test/spec.sh builtin-dirs -v --format=ansi -r 5
+# test/spec.sh builtin-dirs -v --format=ansi -r 5
 # test/spec.sh builtin-eval-source --format=diffable
 # test/spec.sh builtin-getopts --format=diffable
 # test/spec.sh builtin-io --format=diffable
