@@ -9,42 +9,6 @@
 # test/spec.sh osh-all-serial -v --format=sane
 # test/spec.sh builtin-completion -v
 
-# DOING: you went through all the work of making an interactive bash, but it seems like maybe it broke more than it fixed; maybe the test just needed to use -i -c? (NO, THIS DOESN'T SEEM TO HELP)
-# OR WAIT; maybe this is just exposing a break that was already there?
-
-# test/spec.sh arith -v --format=sane
-# test/spec.sh array -v --format=sane
-# test/spec.sh brace-expansion -v --format=sane
-# test/spec.sh builtin-bash -v --format=sane
-# test/spec.sh builtin-completion -v --format=sane
-# test/spec.sh builtin-dirs -v --format=sane
-# test/spec.sh builtin-printf -v --format=sane
-# test/spec.sh builtins -v --format=sane
-# test/spec.sh case_ -v --format=sane
-# test/spec.sh command_ -v --format=sane
-# test/spec.sh dbracket -v --format=sane
-# test/spec.sh extglob-match -v --format=sane
-# test/spec.sh glob -v --format=sane
-# test/spec.sh loop -v --format=sane
-# test/spec.sh pipeline -v --format=sane
-# test/spec.sh prompt -v --format=sane
-# test/spec.sh quote -v --format=sane
-# test/spec.sh regex -v --format=sane
-# test/spec.sh sh-options -v --format=sane
-# test/spec.sh tilde -v --format=sane
-# test/spec.sh var-op-bash -v --format=sane
-# test/spec.sh var-op-len -v --format=sane
-# test/spec.sh var-op-patsub -v --format=sane
-# test/spec.sh var-op-strip -v --format=sane
-# test/spec.sh var-sub -v --format=sane
-# test/spec.sh word-eval -v --format=sane
-# test/spec.sh word-split -v --format=sane
-
-# test/spec.sh builtin-dirs -v --format=sane -r 6
-# test/spec.sh builtin-dirs -v -r 6
-# test/spec.sh glob -v
-# test/spec.sh brace-expansion -v -r 29
-
 # test/spec.sh oil-array --format=diffable
 # test/spec.sh oil-assign --format=diffable
 # test/spec.sh oil-bin --format=diffable
@@ -58,7 +22,7 @@
 # test/spec.sh oil-interactive --format=diffable
 # test/spec.sh oil-json --format=diffable
 # test/spec.sh oil-keywords --format=diffable
-# test/spec.sh oil-options -v --format=ansi
+# test/spec.sh oil-options -v --format=diffable
 # test/spec.sh oil-regex --format=diffable
 # test/spec.sh oil-slice-range --format=diffable
 # test/spec.sh oil-tuple --format=diffable
@@ -77,16 +41,16 @@
 # test/spec.sh background --format=diffable
 # test/spec.sh blog1 --format=diffable
 # test/spec.sh blog2 --format=diffable
-test/spec.sh brace-expansion -v --format=ansi -r 29
+# test/spec.sh brace-expansion --format=diffable
 # test/spec.sh bugs --format=diffable
 # test/spec.sh builtin-bash --format=diffable
 # test/spec.sh builtin-bracket --format=diffable
-# test/spec.sh builtin-completion --format=ansi
+# test/spec.sh builtin-completion --format=diffable
 # test/spec.sh builtin-dirs -v --format=diffable
 # test/spec.sh builtin-eval-source --format=diffable
 # test/spec.sh builtin-getopts --format=diffable
 # test/spec.sh builtin-io --format=diffable
-# test/spec.sh builtin-printf --format=diffable
+test/spec.sh builtin-printf -v --format=ansi -r 35
 # test/spec.sh builtin-special --format=diffable
 # test/spec.sh builtin-times --format=diffable
 # test/spec.sh builtin-trap --format=diffable
