@@ -102,8 +102,10 @@ all-oil-parse() {
 }
 
 bin-flake8() {
-  local ubuntu_flake8=~/.local/bin/flake8 
-  if test -f "$ubuntu_flake8"; then
+  local ubuntu_flake8=~/.local/bin/flake8
+  if type -p flake8; then
+    flake8 "$@"
+  elif test -f "$ubuntu_flake8"; then
     $ubuntu_flake8 "$@"
   else
     python2 -m flake8 "$@"
