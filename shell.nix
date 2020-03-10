@@ -65,6 +65,7 @@ mkShell rec {
   # Here are a few ideas that made sense to me:
   shellHook = ''
     ${if glibcLocales != null then "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive' LC_CTYPE='C.UTF-8'" else ""}
+    ${if stdenv.isDarwin then "export LC_CTYPE='UTF-8'" else ""}
     if [[ ! -a "$PWD/py-yajl/setup.py" ]]; then
       git submodule update --init --recursive
     fi
