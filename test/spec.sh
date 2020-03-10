@@ -23,31 +23,31 @@ shell-path() {
   fi
 }
 
-if test -f ${OIL_TEST_SHELL_DASH-}; then
+if test -f "${OIL_TEST_SHELL_DASH-}"; then
   readonly DASH=${OIL_TEST_SHELL_DASH-}
 else
   readonly DASH=$(shell-path dash)
 fi
 
-if test -f ${OIL_TEST_SHELL_BASH-}; then
+if test -f "${OIL_TEST_SHELL_BASH-}"; then
   readonly BASH=${OIL_TEST_SHELL_BASH-}
 else
   readonly BASH=$(shell-path bash)
 fi
 
-if test -f ${OIL_TEST_SHELL_MKSH-}; then
+if test -f "${OIL_TEST_SHELL_MKSH-}"; then
   readonly MKSH=${OIL_TEST_SHELL_MKSH-}
 else
   readonly MKSH=$(shell-path mksh)
 fi
 
-if test -f ${OIL_TEST_SHELL_ZSH-}; then
+if test -f "${OIL_TEST_SHELL_ZSH-}"; then
   readonly ZSH=${OIL_TEST_SHELL_ZSH-}
 else
   readonly ZSH=$(shell-path zsh)
 fi
 
-if test -f ${OIL_TEST_SHELL_ASH-}; then
+if test -f "${OIL_TEST_SHELL_ASH-}"; then
   readonly BUSYBOX_ASH=${OIL_TEST_SHELL_ASH-}
 elif test -f _tmp/spec-bin/ash; then
   readonly BUSYBOX_ASH=$PWD/_tmp/spec-bin/ash
@@ -329,35 +329,35 @@ word-eval() {
 # These cases apply to many shells.
 assign() {
   sh-spec spec/assign.test.sh --osh-failures-allowed 2 \
-    ${REF_SHELLS[@]} $ZSH $OSH_LIST "$@" 
+    ${REF_SHELLS[@]} $ZSH $OSH_LIST "$@"
 }
 
 # These cases apply to a few shells.
 assign-extended() {
   sh-spec spec/assign-extended.test.sh \
-    $BASH $MKSH $OSH_LIST "$@" 
+    $BASH $MKSH $OSH_LIST "$@"
 }
 
 # Corner cases that OSH doesn't handle
 assign-deferred() {
   sh-spec spec/assign-deferred.test.sh \
-    $BASH $MKSH "$@" 
+    $BASH $MKSH "$@"
 }
 
 # These test associative arrays
 assign-dialects() {
   sh-spec spec/assign-dialects.test.sh --osh-failures-allowed 1 \
-    $BASH $MKSH $OSH_LIST "$@" 
+    $BASH $MKSH $OSH_LIST "$@"
 }
 
 background() {
   sh-spec spec/background.test.sh --osh-failures-allowed 2 \
-    ${REF_SHELLS[@]} $OSH_LIST "$@" 
+    ${REF_SHELLS[@]} $OSH_LIST "$@"
 }
 
 subshell() {
   sh-spec spec/subshell.test.sh \
-    ${REF_SHELLS[@]} $OSH_LIST "$@" 
+    ${REF_SHELLS[@]} $OSH_LIST "$@"
 }
 
 quote() {
@@ -622,7 +622,7 @@ errexit-oil() {
     ${REF_SHELLS[@]} $BUSYBOX_ASH $OSH_LIST "$@"
 }
 
-# 
+#
 # Non-POSIX extensions: arrays, brace expansion, [[, ((, etc.
 #
 
@@ -649,7 +649,7 @@ type-compat() {
 # += is not POSIX and not in dash.
 append() {
   sh-spec spec/append.test.sh \
-    $BASH $MKSH $OSH_LIST "$@" 
+    $BASH $MKSH $OSH_LIST "$@"
 }
 
 # associative array -- mksh and zsh implement different associative arrays.
