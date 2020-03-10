@@ -40,6 +40,12 @@ _nix_macos: &nix_macos
     - echo "trusted-users = root $USER" | sudo tee -a /etc/nix/nix.conf
     - sudo launchctl kickstart -k system/org.nixos.nix-daemon || true
 
+_nix_build: &nix_build
+  env: NIX_BUILD_TYPE='nix-build'
+
+_nix_shell: &nix_shell
+  env: NIX_BUILD_TYPE="nix-shell --pure --run ./test.sh"
+
 jobs:
   include:
   # macOS builds tend to take longer; let's see if
@@ -47,15 +53,17 @@ jobs:
   - name: "macos minimal in-tree"
     os: osx
     <<: *minimal_in_tree
-    cache: brew
+    cache:
+      - brew
+      - pip
 
   - name: "nix-build macos"
-    env: NIX_BUILD_TYPE='nix-build'
+    <<: *nix_build
     <<: *nix_full
     <<: *nix_macos
 
   - name: "nix-shell macos"
-    env: NIX_BUILD_TYPE="nix-shell --run ./test.sh"
+    <<: *nix_shell
     <<: *nix_full
     <<: *nix_macos
 
@@ -85,13 +93,13 @@ jobs:
 
   - name: "nix-build linux"
     os: linux
-    env: NIX_BUILD_TYPE='nix-build'
+    <<: *nix_build
     <<: *nix_full
 
 
   - name: "nix-shell linux"
     os: linux
-    env: NIX_BUILD_TYPE="nix-shell --pure --run ./test.sh"
+    <<: *nix_shell
     <<: *nix_full
 
   # report status when required jobs finish
