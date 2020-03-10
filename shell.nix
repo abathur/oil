@@ -8,6 +8,7 @@
 , cleanup ? true }:
 
 let
+  shells = import ./test_shells.nix { inherit pkgs; };
   drv = import ./default.nix { inherit pkgs; };
   # Added the following 3 declarations (and parameters/defaults above) to
   # demonstrate how you could make the behavior a little configurable.
@@ -52,6 +53,13 @@ mkShell rec {
   LOCALE_ARCHIVE = pkgs.lib.optionalString (buildPlatform.libc == "glibc") "${glibcLocales}/lib/locale/locale-archive";
   LC_CTYPE= pkgs.lib.optionalString stdenv.isDarwin "UTF-8";
   LANG="en_US.UTF-8";
+
+  # can just tell the tests where the shells are since we already know
+  OIL_TEST_SHELL_DASH = "${shells.test_dash}/bin/dash";
+  OIL_TEST_SHELL_BASH = "${shells.test_bash}/bin/bash";
+  OIL_TEST_SHELL_MKSH = "${shells.test_mksh}/bin/mksh";
+  OIL_TEST_SHELL_ZSH = "${shells.test_zsh}/bin/zsh";
+  OIL_TEST_SHELL_ASH = pkgs.lib.optionalString stdenv.isLinux "${shells.test_busybox}/bin/ash";
 
   # do setup work you want to do every time you enter the shell
   # Here are a few ideas that made sense to me:
