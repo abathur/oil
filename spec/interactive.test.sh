@@ -52,6 +52,9 @@ RCFILE
 
 #### interactive shell runs PROMPT_COMMAND after each command
 export PS1=''  # OSH prints prompt to stdout
+echo outer
+env | grep LC_
+locale
 
 case $SH in
   *bash|*osh)
@@ -59,6 +62,9 @@ case $SH in
 PROMPT_COMMAND='echo PROMPT'
 echo one
 echo two
+echo inner
+env | grep LC_
+locale
 EOF
     ;;
 esac
