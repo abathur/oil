@@ -1,5 +1,8 @@
 # canonical test script; should probably be renamed
 # along with references in .travis.yml
+set -o nounset
+set -o pipefail
+set -o errexit
 
 test/lint.sh travis
 # Type checking with MyPy.  Problem: mypy requires Python 3, but Oil
