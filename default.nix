@@ -52,7 +52,7 @@ in python27Packages.buildPythonPackage rec {
 
   # Patch shebangs so Nix can find all executables
   postPatch = ''
-    patchShebangs build asdl frontend oil_lang native doctools test spec core types benchmarks
+    patchShebangs asdl benchmarks build core doctools frontend native oil_lang spec test types
     #substituteInPlace build/dev.sh --replace "native/libc_test.py" "# native/libc_test.py"
     #substituteInPlace build/codegen.sh --replace "re2c() { _deps/re2c-1.0.3/re2c" "# re2c() { _deps/re2c-1.0.3/re2c"
     substituteInPlace test/spec.sh --replace 'readonly REPO_ROOT=$(cd $(dirname $0)/..; pwd)' "REPO_ROOT=$out"
