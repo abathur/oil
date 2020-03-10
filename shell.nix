@@ -65,7 +65,7 @@ mkShell rec {
   # Here are a few ideas that made sense to me:
   shellHook = ''
     set -x
-    ${if glibcLocales != null then "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive' LC_CTYPE='en_us.UTF-8'" else ""}
+    ${if glibcLocales != null then "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive' LC_CTYPE='C.UTF-8'" else ""}
     ${if stdenv.isDarwin then "export LC_CTYPE='en_us.UTF-8'" else ""}
     set +x
     if [[ ! -a "$PWD/py-yajl/setup.py" ]]; then
@@ -82,5 +82,7 @@ mkShell rec {
     fi
 
     ${cleanup_oil}
+
+    echo NIX_SHELL LC_CTYPE=$LC_CTYPE
   '';
 }
