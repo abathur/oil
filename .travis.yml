@@ -42,7 +42,24 @@ _nix_macos: &nix_macos
 
 jobs:
   include:
-  - name: linux minimal in-tree
+  # macOS builds tend to take longer; let's see if
+  # starting them first cuts total run clock time
+  - name: "macos minimal in-tree"
+    os: osx
+    <<: *minimal_in_tree
+    cache: brew
+
+  - name: "nix-build macos"
+    env: NIX_BUILD_TYPE='nix-build'
+    <<: *nix_full
+    <<: *nix_macos
+
+  - name: "nix-shell macos"
+    env: NIX_BUILD_TYPE="nix-shell --run ./test.sh"
+    <<: *nix_full
+    <<: *nix_macos
+
+  - name: "linux minimal in-tree"
     <<: *minimal_in_tree
     os: linux
     dist: xenial
@@ -65,39 +82,23 @@ jobs:
           - python-pip
           - python3-pip
 
-  # report status when required jobs finish
-  fast_finish: true
-  allow_failures:
-  # macOS builds tend to take longer; let's see if
-  # starting them first cuts total run clock time
-  - name: macos minimal in-tree
-    os: osx
-    <<: *minimal_in_tree
-    cache: brew
 
-  - name: nix-build macos
-    <<: *nix_full
-    <<: *nix_macos
-
-  - name: nix-shell macos
-    env: NIX_BUILD_TYPE="nix-shell --run ./test.sh"
-    <<: *nix_full
-    <<: *nix_macos
-
-
-
-  - name: nix-build linux
+  - name: "nix-build linux"
     os: linux
     env: NIX_BUILD_TYPE='nix-build'
     <<: *nix_full
 
 
-  - name: nix-shell linux
+  - name: "nix-shell linux"
     os: linux
     env: NIX_BUILD_TYPE="nix-shell --run ./test.sh"
     <<: *nix_full
 
-
+  # report status when required jobs finish
+  fast_finish: true
+  allow_failures:
+  - os: osx
+  - language: nix
 
 # notifications:
 #   on_success: change
