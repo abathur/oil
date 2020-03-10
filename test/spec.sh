@@ -19,7 +19,7 @@ shell-path() {
   if test -f _tmp/spec-bin/$name; then
     echo $REPO_ROOT/_tmp/spec-bin/$name
   else
-    which $name
+    type -p $name
   fi
 }
 
