@@ -64,8 +64,10 @@ mkShell rec {
   # do setup work you want to do every time you enter the shell
   # Here are a few ideas that made sense to me:
   shellHook = ''
-    ${if glibcLocales != null then "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive' LC_CTYPE='C.UTF-8'" else ""}
-    ${if stdenv.isDarwin then "export LC_CTYPE='UTF-8'" else ""}
+    set -x
+    ${if glibcLocales != null then "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive' LC_CTYPE='en_us.UTF-8'" else ""}
+    ${if stdenv.isDarwin then "export LC_CTYPE='en_us.UTF-8'" else ""}
+    set +x
     if [[ ! -a "$PWD/py-yajl/setup.py" ]]; then
       git submodule update --init --recursive
     fi
