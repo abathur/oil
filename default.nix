@@ -12,7 +12,7 @@ with pkgs; let
   deps = import ./oil_deps.nix { inherit pkgs; };
 
 # Standard builder from Nixpkgs that we use to build oil
-in python27Packages.buildPythonPackage rec {
+in pkgs.python27Packages.buildPythonPackage rec {
 
   pname = "oil";
   version = "undefined";
@@ -32,10 +32,10 @@ in python27Packages.buildPythonPackage rec {
   #   fetchSubmodules = true;
   # };
   buildInputs = deps.buildInputs;
-  nativeBuildInputs = deps.binary ++ deps.commands ++ [ deps.oilPython deps.py-yajl ];
-  propagatedBuildInputs = [ re2c deps.oilPython deps.py-yajl ];  #configureFlags = [ "--with-readline" ];
+  nativeBuildInputs = [ deps.py-yajl ] ++ deps.binary ++ deps.commands ++ deps.static_analysis;
+  propagatedBuildInputs = [ re2c deps.py-yajl deps.oilPython ];  #configureFlags = [ "--with-readline" ];
 
-  checkInputs = with shells; [ test_bash test_dash test_mksh test_zsh ] ++ [ deps.oilPython deps.py-yajl mypy ] ++ lib.optionals (stdenv.isLinux) [ shells.test_busybox ];
+  checkInputs = with shells; [ deps.py-yajl ] ++ [ test_bash test_dash test_mksh test_zsh ] ++ lib.optionals (stdenv.isLinux) [ shells.test_busybox ] ++ deps.static_analysis;
   doCheck = true;
   dontStrip = true;
 
@@ -52,6 +52,8 @@ in python27Packages.buildPythonPackage rec {
 
   # Patch shebangs so Nix can find all executables
   postPatch = ''
+    env | grep PYTHONPATH
+    echo postPatch: $PATH
     patchShebangs asdl benchmarks build core doctools frontend native oil_lang spec test types
     #substituteInPlace build/dev.sh --replace "native/libc_test.py" "# native/libc_test.py"
     #substituteInPlace build/codegen.sh --replace "re2c() { _deps/re2c-1.0.3/re2c" "# re2c() { _deps/re2c-1.0.3/re2c"
@@ -65,6 +67,7 @@ in python27Packages.buildPythonPackage rec {
     install _devbuild/gen/*.marshal $out/_devbuild/gen/
     install _devbuild/help/* $out/_devbuild/help/
     install oil-version.txt $out/${deps.oilPython.sitePackages}/
+    # TODO: is the above right? looks odd.
 
     buildPythonPath "$out $propagatedBuildInputs"
 
@@ -90,6 +93,8 @@ in python27Packages.buildPythonPackage rec {
 
   checkPhase = ''
     env | grep OIL_TEST_SHELL
+    echo checkPhase: $PATH
+    ./test.sh
     # status=0
     # if ./test.sh > test_output ; then
     #   mkdir -p $out/_tmp/spec/ _tmp/spec/

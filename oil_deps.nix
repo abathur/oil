@@ -4,6 +4,8 @@ This file just defines non-oil/osh shells we need to build to run the tests.
 { pkgs ? import ./nixpkgs.nix }:
 
 with pkgs; rec {
+  pythonDeps = with python27Packages; [ setuptools flake8 pyannotate six typing ];
+  oilPython = python27.withPackages (ps: with ps; pythonDeps );
   py-yajl = python27Packages.buildPythonPackage rec {
     pname = "oil-pyyajl";
     version = "unreleased";
@@ -16,7 +18,6 @@ with pkgs; rec {
     };
     nativeBuildInputs = [ pkgs.git ];
   };
-  oilPython = python27.withPackages (ps: with ps; [ flake8 pyannotate six typing ]);
 
 
   # Most of the items you listed in #513 are here now. I'm not sure what the
@@ -34,7 +35,7 @@ with pkgs; rec {
   # nixpkgs: busybox linux only; no smoosh
   # could append something like: ++ lib.optionals stdenv.isLinux [ busybox ]
   static_analysis = [
-    mypy # This is the Python 3 version
+    (python37.withPackages (ps: with ps; [ mypy ] ))
     oilPython
   ];
   binary = [ re2c ];
@@ -51,5 +52,5 @@ with pkgs; rec {
     hostname
     which
   ];
-  buildInputs = c_deps ++ binary ++ static_analysis ++ doctools ++ commands ++ doctools ++ [ py-yajl makeWrapper ];
+  buildInputs = c_deps ++ binary ++ doctools ++ commands ++ doctools ++ [ py-yajl makeWrapper ] ++ static_analysis;
 }
