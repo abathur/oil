@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # test/spec.sh smoke
 # test/lint.sh travis
 # types/oil-slice.sh travis
@@ -111,3 +112,20 @@ test/spec.sh builtin-printf -v --format=ansi -r 35
 # test/spec.sh word-eval --format=diffable
 # test/spec.sh word-split --format=diffable
 # test/spec.sh xtrace --format=diffable
+=======
+# canonical test script; should probably be renamed
+# along with references in .travis.yml
+
+test/lint.sh travis
+# Type checking with MyPy.  Problem: mypy requires Python 3, but Oil
+# requires Python 2.  The Travis environment doesn't like that.
+types/run.sh travis
+types/oil-slice.sh travis
+# Unit tests
+test/unit.sh all-for-minimal
+# Spec tests
+test/spec.sh smoke
+# Make sure dev build of yajl works
+test/spec.sh oil-json
+test/spec.sh interactive
+>>>>>>> support multiple CI builds
