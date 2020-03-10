@@ -91,7 +91,7 @@ jobs:
 
   - name: "nix-shell linux"
     os: linux
-    env: NIX_BUILD_TYPE="nix-shell --run ./test.sh"
+    env: NIX_BUILD_TYPE="nix-shell --pure --run ./test.sh"
     <<: *nix_full
 
   # report status when required jobs finish
