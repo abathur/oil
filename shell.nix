@@ -10,6 +10,7 @@
 let
   shells = import ./test_shells.nix { inherit pkgs; };
   drv = import ./default.nix { inherit pkgs; };
+  deps = import ./oil_deps.nix { inherit pkgs; };
   # Added the following 3 declarations (and parameters/defaults above) to
   # demonstrate how you could make the behavior a little configurable.
   #
@@ -65,6 +66,7 @@ mkShell rec {
   # Here are a few ideas that made sense to me:
   shellHook = ''
     set -x
+    export _OVM_RESOURCE_ROOT="$out/${deps.oilPython.sitePackages}"
     ${if glibcLocales != null then "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive' LC_CTYPE='C.UTF-8'" else ""}
     ${if stdenv.isDarwin then "export LC_CTYPE='en_us.UTF-8'" else ""}
     set +x
