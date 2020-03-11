@@ -42,7 +42,7 @@ in with pkgs;
 # Create a shell with packages we need.
 mkShell rec {
   # pull most deps from default.nix
-  buildInputs = drv.buildInputs ++ [
+  buildInputs = drv.buildInputs ++ lib.optionals (glibcLocales != null) [ glibcLocales
     nixfmt # `nixfmt *.nix` to format in place
   ];
 

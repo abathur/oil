@@ -52,14 +52,14 @@ RCFILE
 
 #### interactive shell runs PROMPT_COMMAND after each command
 export PS1=''  # OSH prints prompt to stdout
-echo outer: $LC_CTYPE
-echo $LOCALE_ARCHIVE
+echo outer
+python -m locale
 
 case $SH in
   *bash|*osh)
 	$SH --rcfile /dev/null -i << EOF
-echo inner: $LC_CTYPE
-echo $LOCALE_ARCHIVE
+echo inner
+python -m locale
 EOF
     $SH --rcfile /dev/null -i << EOF
 PROMPT_COMMAND='echo PROMPT'
