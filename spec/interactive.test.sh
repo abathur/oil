@@ -91,7 +91,7 @@ EOF
 esac
 
 # Paper over difference with OSH
-case $SH in *bash) echo '^D';; esac
+# case $SH in *bash) echo '^D';; esac
 
 ## STDOUT:
 PROMPT
