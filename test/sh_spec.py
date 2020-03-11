@@ -1053,6 +1053,7 @@ def MakeTestEnv(opts):
     'PATH': opts.path_env,
     'LANG': opts.lang_env,
     'LC_CTYPE': opts.lang_env,
+    'LOCALE_ARCHIVE': os.environ.get('LOCALE_ARCHIVE', '')
   }
   log("env %r", env)
   for p in opts.env_pair:
