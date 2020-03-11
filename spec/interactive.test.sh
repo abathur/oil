@@ -71,8 +71,15 @@ EOF
     ;;
   *osh)
 	$(dirname $SH)/oil.py osh --rcfile /dev/null -i << EOF
-echo inner
+echo inner1
+echo $LANG
+EOF
+	$(dirname $SH)/oil.py osh --rcfile /dev/null -i << EOF
+echo inner2
 python -c "import locale; print(locale._build_localename(locale.getdefaultlocale()))"
+EOF
+	$(dirname $SH)/oil.py osh --rcfile /dev/null -i << EOF
+echo inner3
 python -m locale
 EOF
 	$(dirname $SH)/oil.py osh --rcfile /dev/null -i  << EOF
