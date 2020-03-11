@@ -52,7 +52,6 @@ import collections
 import cgi
 import cStringIO
 import json
-import locale
 import optparse
 import os
 import pprint
@@ -1053,9 +1052,11 @@ def MakeTestEnv(opts):
     'PATH': opts.path_env,
     'LANG': opts.lang_env,
   }
+
   if 'LOCALE_ARCHIVE' in os.environ:
+    # If present, this needs to make it through for nix-shell
     env['LOCALE_ARCHIVE'] = os.environ['LOCALE_ARCHIVE']
-  log("env %r", env)
+
   for p in opts.env_pair:
     name, value = p.split('=', 1)
     env[name] = value
