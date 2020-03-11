@@ -56,7 +56,7 @@ echo outer
 python -m locale
 
 case $SH in
-  *bash|*osh)
+  *bash)
 	$SH --rcfile /dev/null -i << EOF
 echo inner
 python -m locale
@@ -67,6 +67,17 @@ echo one
 echo two
 EOF
     ;;
+  *osh)
+	$(dirname $SH)/oil.py osh --rcfile /dev/null -i << EOF
+echo inner
+python -m locale
+EOF
+	$(dirname $SH)/oil.py osh --rcfile /dev/null -i  << EOF
+PROMPT_COMMAND='echo PROMPT'
+echo one
+echo two
+EOF
+	;;
 esac
 
 # Paper over difference with OSH
