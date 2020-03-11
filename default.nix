@@ -43,8 +43,8 @@ in pkgs.python27Packages.buildPythonPackage rec {
   SOURCE_DATE_EPOCH=315532800;
 
   LOCALE_ARCHIVE = pkgs.lib.optionalString (buildPlatform.libc == "glibc") "${glibcLocales}/lib/locale/locale-archive";
-  LC_CTYPE= pkgs.lib.optionalString stdenv.isDarwin "UTF-8";
-  LANG="en_US.UTF-8";
+  # LC_CTYPE= pkgs.lib.optionalString stdenv.isDarwin "UTF-8";
+  # LANG="en_US.UTF-8";
 
   preBuild = ''
     build/dev.sh all

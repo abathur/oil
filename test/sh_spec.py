@@ -1053,6 +1053,7 @@ def MakeTestEnv(opts):
     'PATH': opts.path_env,
     'LANG': opts.lang_env,
   }
+  log("env %r", env)
   for p in opts.env_pair:
     name, value = p.split('=', 1)
     env[name] = value

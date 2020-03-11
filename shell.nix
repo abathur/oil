@@ -42,7 +42,7 @@ in with pkgs;
 # Create a shell with packages we need.
 mkShell rec {
   # pull most deps from default.nix
-  buildInputs = drv.buildInputs ++ lib.optionals (glibcLocales != null) [ glibcLocales
+  buildInputs = drv.buildInputs ++ [
     nixfmt # `nixfmt *.nix` to format in place
   ];
 
@@ -53,7 +53,7 @@ mkShell rec {
   NIX_ENFORCE_PURITY = 0;
   # LOCALE_ARCHIVE = pkgs.lib.optionalString (buildPlatform.libc == "glibc") "${glibcLocales}/lib/locale/locale-archive";
   # LC_CTYPE= pkgs.lib.optionalString stdenv.isDarwin "UTF-8";
-  LANG="en_US.UTF-8";
+  # LANG="en_US.UTF-8";
 
   # can just tell the tests where the shells are since we already know
   OIL_TEST_SHELL_DASH = "${shells.test_dash}/bin/dash";
@@ -67,8 +67,8 @@ mkShell rec {
   shellHook = ''
     set -x
     export _OVM_RESOURCE_ROOT="$PWD"
-    ${if glibcLocales != null then "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive' LC_CTYPE='C.UTF-8'" else ""}
-    ${if stdenv.isDarwin then "export LC_CTYPE='en_us.UTF-8'" else ""}
+    ${if glibcLocales != null then "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive'" else ""}
+    ${if stdenv.isDarwin then "" else ""}
     set +x
     if [[ ! -a "$PWD/py-yajl/setup.py" ]]; then
       git submodule update --init --recursive
