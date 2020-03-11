@@ -1052,6 +1052,7 @@ def MakeTestEnv(opts):
     'TMP': os.path.normpath(opts.tmp_env),  # no .. or .
     'PATH': opts.path_env,
     'LANG': opts.lang_env,
+    'LC_CTYPE': opts.lang_env,
   }
   log("env %r", env)
   for p in opts.env_pair:
