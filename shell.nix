@@ -53,7 +53,7 @@ mkShell rec {
   NIX_ENFORCE_PURITY = 0;
   # LOCALE_ARCHIVE = pkgs.lib.optionalString (buildPlatform.libc == "glibc") "${glibcLocales}/lib/locale/locale-archive";
   # LC_CTYPE= pkgs.lib.optionalString stdenv.isDarwin "UTF-8";
-  # LANG="en_US.UTF-8";
+  LANG="en_US.UTF-8";
 
   # can just tell the tests where the shells are since we already know
   OIL_TEST_SHELL_DASH = "${shells.test_dash}/bin/dash";
