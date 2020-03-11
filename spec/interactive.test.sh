@@ -56,12 +56,13 @@ echo outer: $LC_CTYPE
 
 case $SH in
   *bash|*osh)
+	$SH --rcfile /dev/null -i << EOF
+echo inner: $LC_CTYPE
+EOF
     $SH --rcfile /dev/null -i << EOF
 PROMPT_COMMAND='echo PROMPT'
 echo one
 echo two
-echo inner
-echo inner: $LC_CTYPE
 EOF
     ;;
 esac
