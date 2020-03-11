@@ -56,8 +56,8 @@ echo outer
 python -c "import locale; print(locale._build_localename(locale.getdefaultlocale()))"
 python -m locale
 
-case $SH in
-  *bash)
+case $(basename $SH) in
+  bash)
 	$SH --rcfile /dev/null -i << EOF
 echo inner
 python -c "import locale; print(locale._build_localename(locale.getdefaultlocale()))"
@@ -69,7 +69,7 @@ echo one
 echo two
 EOF
     ;;
-  *osh)
+  osh)
 	$(dirname $SH)/oil.py osh --rcfile /dev/null -i << EOF
 echo inner1
 echo $LANG
