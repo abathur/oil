@@ -4,7 +4,7 @@
 # specific to a Python version.  MyPy needs both in the same environment.
 ---
 
-language: c # just overriding the default ruby
+language: minimal # just overriding the default ruby
 os: linux
 
 _minimal_in_tree: &minimal_in_tree
