@@ -1052,9 +1052,9 @@ def MakeTestEnv(opts):
     'TMP': os.path.normpath(opts.tmp_env),  # no .. or .
     'PATH': opts.path_env,
     'LANG': opts.lang_env,
-    'LC_CTYPE': opts.lang_env,
-    'LOCALE_ARCHIVE': os.environ.get('LOCALE_ARCHIVE', '')
   }
+  if 'LOCALE_ARCHIVE' in os.environ:
+    env['LOCALE_ARCHIVE'] = os.environ['LOCALE_ARCHIVE']
   log("env %r", env)
   for p in opts.env_pair:
     name, value = p.split('=', 1)

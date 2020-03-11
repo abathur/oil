@@ -34,7 +34,6 @@ one
 ## N-I mksh stdout-json: ""
 
 #### interactive shell loads rcfile (when combined with -c)
-python -m locale
 $SH -c 'echo 1'
 cat >$TMP/rcfile <<EOF
 echo RCFILE
@@ -53,45 +52,19 @@ RCFILE
 
 #### interactive shell runs PROMPT_COMMAND after each command
 export PS1=''  # OSH prints prompt to stdout
-echo outer
-python -c "import locale; print(locale._build_localename(locale.getdefaultlocale()))"
 
-case $(basename $SH) in
-  bash)
-	$SH --rcfile /dev/null -i << EOF
-echo inner
-python -c "import locale; print(locale._build_localename(locale.getdefaultlocale()))"
-python -m locale
-EOF
+case $SH in
+  *bash|*osh)
     $SH --rcfile /dev/null -i << EOF
 PROMPT_COMMAND='echo PROMPT'
 echo one
 echo two
 EOF
     ;;
-  osh)
-	$(dirname $SH)/oil.py osh --rcfile /dev/null -i << EOF
-echo inner1
-echo $LANG
-EOF
-	$(dirname $SH)/oil.py osh --rcfile /dev/null -i << EOF
-echo inner2
-python -c "import locale; print(locale._build_localename(locale.getdefaultlocale()))"
-EOF
-	$(dirname $SH)/oil.py osh --rcfile /dev/null -i << EOF
-echo inner3
-python -m locale
-EOF
-	$(dirname $SH)/oil.py osh --rcfile /dev/null -i  << EOF
-PROMPT_COMMAND='echo PROMPT'
-echo one
-echo two
-EOF
-	;;
 esac
 
 # Paper over difference with OSH
-# case $SH in *bash) echo '^D';; esac
+case $SH in *bash) echo '^D';; esac
 
 ## STDOUT:
 PROMPT
