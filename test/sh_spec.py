@@ -1107,7 +1107,7 @@ def Options():
   # - this flag has limited usefulness.  It may be better to simply export LANG=
   #   in this test case itself.
   p.add_option(
-      '--lang-env', dest='lang_env', default=".".join(locale.getdefaultlocale()),
+      '--lang-env', dest='lang_env', default='en_US.UTF-8',
       help="The LANG= setting, which affects various libc functions.")
   p.add_option(
       '--env-pair', dest='env_pair', default=[], action='append',
