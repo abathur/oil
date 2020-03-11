@@ -53,14 +53,14 @@ RCFILE
 #### interactive shell runs PROMPT_COMMAND after each command
 export PS1=''  # OSH prints prompt to stdout
 echo outer
-python -c "locale._build_localename(locale.getdefaultlocale())"
+python -c "import locale; locale._build_localename(locale.getdefaultlocale())"
 python -m locale
 
 case $SH in
   *bash)
 	$SH --rcfile /dev/null -i << EOF
 echo inner
-python -c "locale._build_localename(locale.getdefaultlocale())"
+python -c "import locale; locale._build_localename(locale.getdefaultlocale())"
 python -m locale
 EOF
     $SH --rcfile /dev/null -i << EOF
@@ -72,7 +72,7 @@ EOF
   *osh)
 	$(dirname $SH)/oil.py osh --rcfile /dev/null -i << EOF
 echo inner
-python -c "locale._build_localename(locale.getdefaultlocale())"
+python -c "import locale; locale._build_localename(locale.getdefaultlocale())"
 python -m locale
 EOF
 	$(dirname $SH)/oil.py osh --rcfile /dev/null -i  << EOF
