@@ -66,7 +66,7 @@ mkShell rec {
   # Here are a few ideas that made sense to me:
   shellHook = ''
     set -x
-    export _OVM_RESOURCE_ROOT="$out/${deps.oilPython.sitePackages}"
+    export _OVM_RESOURCE_ROOT="$PWD"
     ${if glibcLocales != null then "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive' LC_CTYPE='C.UTF-8'" else ""}
     ${if stdenv.isDarwin then "export LC_CTYPE='en_us.UTF-8'" else ""}
     set +x
