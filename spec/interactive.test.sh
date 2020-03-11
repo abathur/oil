@@ -34,6 +34,7 @@ one
 ## N-I mksh stdout-json: ""
 
 #### interactive shell loads rcfile (when combined with -c)
+python -m locale
 $SH -c 'echo 1'
 cat >$TMP/rcfile <<EOF
 echo RCFILE
@@ -54,7 +55,6 @@ RCFILE
 export PS1=''  # OSH prints prompt to stdout
 echo outer
 python -c "import locale; print(locale._build_localename(locale.getdefaultlocale()))"
-python -m locale
 
 case $(basename $SH) in
   bash)
