@@ -23,12 +23,33 @@ shell-path() {
   fi
 }
 
-readonly DASH=$(shell-path dash)
-readonly BASH=$(shell-path bash)
-readonly MKSH=$(shell-path mksh)
-readonly ZSH=$(shell-path zsh)
+if test -f "${OIL_TEST_SHELL_DASH-}"; then
+  readonly DASH=${OIL_TEST_SHELL_DASH-}
+else
+  readonly DASH=$(shell-path dash)
+fi
 
-if test -f _tmp/spec-bin/ash; then
+if test -f "${OIL_TEST_SHELL_BASH-}"; then
+  readonly BASH=${OIL_TEST_SHELL_BASH-}
+else
+  readonly BASH=$(shell-path bash)
+fi
+
+if test -f "${OIL_TEST_SHELL_MKSH-}"; then
+  readonly MKSH=${OIL_TEST_SHELL_MKSH-}
+else
+  readonly MKSH=$(shell-path mksh)
+fi
+
+if test -f "${OIL_TEST_SHELL_ZSH-}"; then
+  readonly ZSH=${OIL_TEST_SHELL_ZSH-}
+else
+  readonly ZSH=$(shell-path zsh)
+fi
+
+if test -f "${OIL_TEST_SHELL_ASH-}"; then
+  readonly BUSYBOX_ASH=${OIL_TEST_SHELL_ASH-}
+elif test -f _tmp/spec-bin/ash; then
   readonly BUSYBOX_ASH=$PWD/_tmp/spec-bin/ash
 else
   readonly BUSYBOX_ASH=$PWD/_tmp/shells/ash
