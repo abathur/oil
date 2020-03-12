@@ -39,6 +39,8 @@ _nix_macos: &nix_macos
     - sudo mkdir -p /etc/nix
     - echo "trusted-users = root $USER" | sudo tee -a /etc/nix/nix.conf
     - sudo launchctl kickstart -k system/org.nixos.nix-daemon || true
+    - sudo mdutil -s / /nix
+    - sudo mdutil -i /nix
     - sudo mdutil -i /
 
 _nix_build: &nix_build
