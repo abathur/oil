@@ -40,7 +40,7 @@ typed-demo-asdl() {
   typecheck --strict \
     _devbuild/gen/typed_demo_asdl.py asdl/typed_demo.py
 
-  PYTHONPATH=. asdl/typed_demo.py "$@"
+  PYTHONPATH=.:${PYTHONPATH:-} asdl/typed_demo.py "$@"
 }
 
 check-arith() {
@@ -56,7 +56,7 @@ typed-arith-asdl() {
   asdl/run.sh gen-typed-arith-asdl
   check-arith
 
-  export PYTHONPATH=. 
+  export PYTHONPATH=.:${PYTHONPATH:-}
   asdl/typed_arith_parse_test.py
 
   echo '---'
