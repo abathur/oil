@@ -1052,6 +1052,11 @@ def MakeTestEnv(opts):
     'PATH': opts.path_env,
     'LANG': opts.lang_env,
   }
+
+  if 'LOCALE_ARCHIVE' in os.environ:
+    # If present, this needs to make it through for nix-shell
+    env['LOCALE_ARCHIVE'] = os.environ['LOCALE_ARCHIVE']
+
   for p in opts.env_pair:
     name, value = p.split('=', 1)
     env[name] = value
