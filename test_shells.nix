@@ -2,17 +2,6 @@
 { pkgs ? import ./nixpkgs.nix }:
 
 rec {
-  # bang_bash is patched to keep it from unsetting PS1/PS2 when the
-  # shell isn't interactive. (Tests that fiddle with PS1/2 will break
-  # without this.
-  bang_bash = pkgs.bash.overrideAttrs (oldAttrs: rec {
-    buildInputs = oldAttrs.buildInputs ++ [ pkgs.makeWrapper ];
-    outputs = [ "out" ]; # don't need man/lib and such
-    postPatch = ''
-      substituteInPlace shell.c --replace "unbind_variable" "// unbind_variable"
-    '';
-  });
-
   # "with pkgs" brings pkgs.* into scope within the curly brace
   # using it for brevity here, but using both forms in this file
   # so that you can see them both in action.
@@ -36,16 +25,7 @@ rec {
           "--without-bash-malloc"
           "--disable-nls"
         ];
-      buildInputs = [ makeWrapper ];
       outputs = [ "out" ];
-
-      # wrap this bash to fix LOCALE_ARCHIVE for libc
-      # and THEN substitute bang_bash into the wrapper's shebang
-      # postInstall = if glibcLocales != null then ''
-      #   wrapProgram "$out/bin/bash" --run "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive'"
-      #   substituteInPlace $out/bin/bash --replace "$runtimeShell" "${bang_bash}/bin/bash"
-      # '' else
-      #   "" + (oldAttrs.postInstall or "");
     });
 
   test_busybox = pkgs.busybox-sandbox-shell.overrideAttrs (oldAttrs: rec {
