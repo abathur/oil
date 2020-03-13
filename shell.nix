@@ -64,6 +64,7 @@ mkShell rec {
   # do setup work you want to do every time you enter the shell
   # Here are a few ideas that made sense to me:
   shellHook = ''
+    export _OVM_RESOURCE_ROOT="$PWD"
     ${if glibcLocales != null then
       "export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive'"
     else

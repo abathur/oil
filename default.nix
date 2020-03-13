@@ -76,6 +76,7 @@ in pkgs.python27Packages.buildPythonPackage rec {
         --add-flags $executable \
         --prefix PATH : "$program_PATH" \
         --prefix PYTHONPATH : "$program_PYTHONPATH" \
+        --set _OVM_RESOURCE_ROOT "$out/${deps.oilPython.sitePackages}" \
         --set PYTHONNOUSERSITE true ${
           if glibcLocales != null then
             " --run \"export LOCALE_ARCHIVE='${glibcLocales}/lib/locale/locale-archive' LC_CTYPE='C.UTF-8'\""
