@@ -6,7 +6,7 @@ set -o errexit
 
 echo "Test shells:"
 type ash bash dash mksh zsh || true
-file bash
+file $(type -p bash)
 
 test/lint.sh travis
 # Type checking with MyPy.  Problem: mypy requires Python 3, but Oil
