@@ -8,13 +8,15 @@ echo "Test shells:"
 type ash bash dash mksh zsh || true
 file $(type -p bash)
 
-test/lint.sh travis
-# Type checking with MyPy.  Problem: mypy requires Python 3, but Oil
-# requires Python 2.  The Travis environment doesn't like that.
-types/run.sh travis
-types/oil-slice.sh travis
-test/unit.sh travis
-test/spec.sh travis
-# Running serially is slow, but easier to debug ...
-test/spec.sh oil-all-serial
-test/spec.sh osh-all-serial
+test/spec.sh interactive -v
+
+# test/lint.sh travis
+# # Type checking with MyPy.  Problem: mypy requires Python 3, but Oil
+# # requires Python 2.  The Travis environment doesn't like that.
+# types/run.sh travis
+# types/oil-slice.sh travis
+# test/unit.sh travis
+# test/spec.sh travis
+# # Running serially is slow, but easier to debug ...
+# test/spec.sh oil-all-serial
+# test/spec.sh osh-all-serial
