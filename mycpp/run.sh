@@ -46,7 +46,7 @@ source $REPO_ROOT/build/common.sh  # for $CLANG_DIR_RELATIVE, $PREPARE_DIR
 source examples.sh
 source harness.sh
 
-readonly CXX=$REPO_ROOT/$CLANG_DIR_RELATIVE/bin/clang++
+readonly CXX=clang++
 # system compiler
 #readonly CXX='c++'
 
@@ -100,7 +100,7 @@ translate-ordered() {
   local raw=_gen/${name}_raw.cc
   local out=_gen/${name}.cc
 
-  ( source _tmp/mycpp-venv/bin/activate
+  ( #source _tmp/mycpp-venv/bin/activate
     time PYTHONPATH=$MYPY_REPO MYPYPATH=$REPO_ROOT:$REPO_ROOT/native \
       ./mycpp_main.py "$@" > $raw
   )
@@ -145,7 +145,7 @@ asdl-gen() {
 
 # Use repo in the virtualenv
 mypy() {
-  ( source _tmp/mycpp-venv/bin/activate
+  ( #source _tmp/mycpp-venv/bin/activate
     PYTHONPATH=$MYPY_REPO python3 -m mypy "$@";
   )
 }

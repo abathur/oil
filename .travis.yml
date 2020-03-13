@@ -104,6 +104,12 @@ jobs:
     <<: *nix_shell
     <<: *nix_full
 
+  - name: "nix-shell linux mycpp something something"
+    os: linux
+    language: nix
+    script:
+      - nix-build mycpp.nix
+
   # report status when required jobs finish
   fast_finish: true
   allow_failures:

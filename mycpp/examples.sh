@@ -127,7 +127,7 @@ translate-modules() {
   local raw=_gen/modules_raw.cc
   local out=_gen/modules.cc
 
-  ( source _tmp/mycpp-venv/bin/activate
+  ( #source _tmp/mycpp-venv/bin/activate
     PYTHONPATH=$MYPY_REPO ./mycpp_main.py \
       testpkg/module1.py testpkg/module2.py examples/modules.py > $raw
   )

@@ -23,7 +23,7 @@ _translate-example() {
 
   # NOTE: mycpp has to be run in the virtualenv, as well as with a different
   # PYTHONPATH.
-  ( source _tmp/mycpp-venv/bin/activate
+  ( #source _tmp/mycpp-venv/bin/activate
     time PYTHONPATH=$MYPY_REPO ./mycpp_main.py $main > $raw
   )
   wc -l $raw
