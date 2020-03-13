@@ -14,3 +14,6 @@ types/run.sh travis
 types/oil-slice.sh travis
 test/unit.sh travis
 test/spec.sh travis
+# Running serially is slow, but easier to debug ...
+test/spec.sh oil-all-serial
+test/spec.sh osh-all-serial
