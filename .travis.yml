@@ -31,7 +31,7 @@ _nix_full: &nix_full
     - echo build command = $NIX_BUILD_TYPE
     - $NIX_BUILD_TYPE
     - echo outside!
-    - bin/osh --version
+    - result/bin/osh --version
     - sleep 10 # to allow cachix finish uploading
 
 _nix_macos: &nix_macos
