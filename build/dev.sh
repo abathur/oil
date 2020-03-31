@@ -279,7 +279,7 @@ _minimal() {
   posix_
 
   # Require submodule
-  yajl
+  # yajl
 }
 
 minimal() {
