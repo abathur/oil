@@ -124,7 +124,7 @@ oil-asdl-to-cpp() {
   gen-asdl-cpp frontend/types.asdl  # no dependency on Id
 
   # Problem:
-  # - we have both _devbuild/gen/id.h 
+  # - we have both _devbuild/gen/id.h
   #           and _build/cpp/id_kind_asdl.h
   # - do we want enum class?
 
@@ -144,7 +144,7 @@ oil-asdl-to-cpp() {
   # bytes rather than 12, although we might want to get rid of it.)
   # Because of C's weak type system (typedef int Id_t), this is better than
   # changing ASDL.
-  local orig=_build/cpp/syntax_asdl.h 
+  local orig=_build/cpp/syntax_asdl.h
   local tmp=_devbuild/tmp/syntax_asdl.h
   sed 's/Id_t id;/uint16_t id;/g' $orig > $tmp
   diff -u $orig $tmp || true
@@ -179,7 +179,7 @@ py-ext() {
 
 pylibc() {
   py-ext libc build/setup.py
-  native/libc_test.py "$@" > /dev/null
+  # native/libc_test.py "$@" > /dev/null
 }
 
 fastlex() {
@@ -221,7 +221,7 @@ yajl-release() {
   cmake .
   make
 
-  #ls -l 
+  #ls -l
 
   # TODO: Run tests too?  There are run_tests.sh files, but not all of them
   # work.
