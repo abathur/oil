@@ -15,7 +15,7 @@ setup(
     name="oil",
     version="0.8",
     description="A new unix shell",
-    packages=find_packages(),
+    packages=["."] + find_packages(),
     include_package_data=True,
     # For posix_methods.def
     include_dirs=["build/oil-defs", "_devbuild/gen"],  # posix_ & fastlex
