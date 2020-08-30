@@ -4,6 +4,10 @@
 # https://github.com/travis-ci/travis-ci/issues/1147
 # Might want to turn this on.
 
+# for `import` directive (used w/ nix job)
+version: ~> 1.0
+import: abathur/nix-travis-ci:nix.yml@main
+
 #branches:
 #  only:
 #    - master
@@ -15,19 +19,16 @@ _publish_html: &publish_html
     # https://docs.travis-ci.com/user/deployment#uploading-files-and-skip_cleanup
     # otherwise we can't zip up _tmp/toil, etc.
     - provider: script
-      skip_cleanup: true
       script: services/travis.sh publish-html
       on:
         branch: master
     # duplicate block for testing on dev branches
     - provider: script
-      skip_cleanup: true
       script: services/travis.sh publish-html
       on:
         branch: dev/andy-26
     # duplicate block for testing on dev branches
     - provider: script
-      skip_cleanup: true
       script: services/travis.sh publish-html
       on:
         branch: dev/andy-vb1
@@ -84,9 +85,8 @@ jobs:
 
     # Developer build that can run all spec tests.
     - name: dev-all-nix
-      language: nix
       script: services/toil-worker.sh run-dev-all-nix
-
+      <<: *use_nix
       <<: *publish_html
 
     # Low-dependency developer build.  Spec tests broken because we don't have
@@ -133,10 +133,6 @@ jobs:
 
       script:
         - services/toil-worker.sh run-dev-minimal
-
-      notifications:
-        on_success: change
-        on_failure: change  # `always` will be the setting once code changes slow down
 
       <<: *publish_html
 
